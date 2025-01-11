@@ -30,16 +30,16 @@ public class SongProcessor {
             JSONObject albumJSON = (JSONObject) trackJSON.get("album");
 
             Song song = new Song();
-            song.setExplicit(trackJSON.get("explicit").toString());
+            song.setExplicit((Boolean) trackJSON.get("explicit"));
             song.setId(trackJSON.get("id").toString());
-            song.setPlayable(trackJSON.get("is_playable").toString());
+            song.setPlayable((Boolean) trackJSON.get("is_playable"));
             song.setName(trackJSON.get("name").toString());
-            song.setPopularity(trackJSON.get("popularity").toString());
+            song.setPopularity(((Number) trackJSON.get("popularity")).intValue());
             song.setAlbumType(albumJSON.get("album_type").toString());
             song.setAlbumId(albumJSON.get("id").toString());
             song.setAlbumName(albumJSON.get("name").toString());
             song.setAlbumReleaseDate(albumJSON.get("release_date").toString());
-            song.setAlbumTotalTracks(albumJSON.get("total_tracks").toString());
+            song.setAlbumTotalTracks(((Number) albumJSON.get("total_tracks")).intValue());
 
             for (Object element : artistsJSON) {
                 JSONObject artistJSON = (JSONObject) element;

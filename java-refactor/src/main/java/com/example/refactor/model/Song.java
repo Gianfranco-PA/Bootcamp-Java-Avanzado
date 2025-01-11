@@ -4,15 +4,15 @@ public class Song {
 
     private String id;
     private String name;
-    private String explicit;
-    private String playable;
-    private String popularity;
+    private Boolean explicit;
+    private Boolean playable;
+    private Integer popularity;
 
     private String albumId;
     private String albumType;
     private String albumName;
     private String albumReleaseDate;
-    private String albumTotalTracks;
+    private Integer albumTotalTracks;
 
     public SpotifyArtist spotifyArtist;
 
@@ -32,27 +32,27 @@ public class Song {
         this.name = name;
     }
 
-    public String getExplicit() {
+    public Boolean isExplicit() {
         return explicit;
     }
 
-    public void setExplicit(String explicit) {
+    public void setExplicit(Boolean explicit) {
         this.explicit = explicit;
     }
 
-    public String getPlayable() {
+    public Boolean isPlayable() {
         return playable;
     }
 
-    public void setPlayable(String playable) {
+    public void setPlayable(Boolean playable) {
         this.playable = playable;
     }
 
-    public String getPopularity() {
+    public Integer getPopularity() {
         return popularity;
     }
 
-    public void setPopularity(String popularity) {
+    public void setPopularity(Integer popularity) {
         this.popularity = popularity;
     }
 
@@ -88,11 +88,11 @@ public class Song {
         this.albumReleaseDate = albumReleaseDate;
     }
 
-    public String getAlbumTotalTracks() {
+    public Integer getAlbumTotalTracks() {
         return albumTotalTracks;
     }
 
-    public void setAlbumTotalTracks(String albumTotalTracks) {
+    public void setAlbumTotalTracks(Integer albumTotalTracks) {
         this.albumTotalTracks = albumTotalTracks;
     }
 
