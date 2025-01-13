@@ -3,6 +3,8 @@ package com.example.refactor.model;
 public class SpotifyArtist {
     private String id;
     private String name;
+    //Not used and not needed
+    //private LinkedList<SpotifyArtist> genres = new LinkedList<>();
 
     public String getId() {
         return id;
@@ -19,4 +21,14 @@ public class SpotifyArtist {
     public void setName(String name) {
         this.name = name;
     }
+
+    /*
+    public LinkedList<?> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(LinkedList<SpotifyArtist> genres) {
+        this.genres = genres;
+    }¨
+    */
 }

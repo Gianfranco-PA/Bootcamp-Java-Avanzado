@@ -17,10 +17,16 @@ public class PropertyFactory {
         properties = new Properties();
         
         try (InputStream inputStream = PropertyFactory.class.getClassLoader().getResourceAsStream(CONFIG_FILE)) {
+            //We should check if the input stream is null
+            if (inputStream == null) {
+                throw new IllegalArgumentException("Configuration file '" + CONFIG_FILE + "' not found");
+            }
             properties.load(inputStream);
         } catch (IOException e) {
             LOGGER.error("ERROR while reading the configuration file: {}", e.getMessage());
+            //It is redundant to print the stack trace here and not is a good practice show the stack trace to the user
             e.printStackTrace();
+            throw new RuntimeException("Failed to load configuration file: " + CONFIG_FILE, e);
         }
     }
 
