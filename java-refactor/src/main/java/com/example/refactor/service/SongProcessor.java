@@ -17,10 +17,25 @@ public class SongProcessor {
     public void processSongs() {
         final String playlistFileName = PropertyFactory.getProperties().getProperty("refactorpractice.playlist.filename");
 
+        if (playlistFileName == null || playlistFileName.isEmpty()) {
+            throw new IllegalArgumentException("Property 'refactorpractice.playlist.filename' is missing or empty");
+        }
+
         final File inputSource = ExampleFileUtils.getFileFromResources(playlistFileName);
+        if (!inputSource.exists() || !inputSource.canRead()) {
+            throw new IllegalArgumentException("File '" + playlistFileName + "' not found or cannot be read");
+        }
+
         final JSONObject playlist = ExampleFileUtils.getJsonFromFile(inputSource);
+        if (playlist == null) {
+            throw new IllegalArgumentException("Playlist JSON is null");
+        }
+
         final LinkedList<Song> spotifyPlayList = new LinkedList<>();
 
+        if (!playlist.containsKey("items")) {
+            throw new IllegalArgumentException("Playlist JSON does not contain 'items'");
+        }
         final JSONArray items = (JSONArray) playlist.get("items");
 
         for (Object item : items) {
@@ -30,23 +45,24 @@ public class SongProcessor {
             JSONObject albumJSON = (JSONObject) trackJSON.get("album");
 
             Song song = new Song();
-            song.setExplicit(trackJSON.get("explicit").toString());
-            song.setId(trackJSON.get("id").toString());
-            song.setPlayable(trackJSON.get("is_playable").toString());
-            song.setName(trackJSON.get("name").toString());
-            song.setPopularity(trackJSON.get("popularity").toString());
-            song.setAlbumType(albumJSON.get("album_type").toString());
-            song.setAlbumId(albumJSON.get("id").toString());
-            song.setAlbumName(albumJSON.get("name").toString());
-            song.setAlbumReleaseDate(albumJSON.get("release_date").toString());
-            song.setAlbumTotalTracks(albumJSON.get("total_tracks").toString());
+            song.setExplicit(getBoolean(trackJSON, "explicit"));
+            song.setId(getString(trackJSON, "id"));
+            song.setPlayable(getBoolean(trackJSON, "is_playable"));
+
+            song.setName(getString(trackJSON, "name"));
+            song.setPopularity(getInt(trackJSON, "popularity"));
+            song.setAlbumType(getString(albumJSON, "album_type"));
+            song.setAlbumId(getString(albumJSON, "id"));
+            song.setAlbumName(getString(albumJSON, "name"));
+            song.setAlbumReleaseDate(getString(albumJSON, "release_date"));
+            song.setAlbumTotalTracks(getInt(albumJSON, "total_tracks"));
 
             for (Object element : artistsJSON) {
                 JSONObject artistJSON = (JSONObject) element;
 
                 SpotifyArtist artist = new SpotifyArtist();
-                artist.setId(artistJSON.get("id").toString());
-                artist.setName(artistJSON.get("name").toString());
+                artist.setId(getString(artistJSON, "id"));
+                artist.setName(getString(artistJSON, "name"));
                 song.setSpotifyArtist(artist);
             }
 
@@ -57,6 +73,27 @@ public class SongProcessor {
             LOGGER.info(" - {} - {} - {} - {}", song.getId(), song.getName(),
                                                 song.getSpotifyArtist().getName(), song.getAlbumName());
         }
+    }
+
+    private String getString(JSONObject json, String key) {
+        if (!json.containsKey(key) || json.get(key) == null) {
+            throw new IllegalArgumentException("Missing or null key: " + key);
+        }
+        return json.get(key).toString();
+    }
+
+    private int getInt(JSONObject json, String key) {
+        if (!json.containsKey(key) || json.get(key) == null) {
+            throw new IllegalArgumentException("Missing or null key: " + key);
+        }
+        return ((Number) json.get(key)).intValue();
+    }
+
+    private boolean getBoolean(JSONObject json, String key) {
+        if (!json.containsKey(key) || json.get(key) == null) {
+            throw new IllegalArgumentException("Missing or null key: " + key);
+        }
+        return ((Boolean) json.get(key));
     }
 
 }

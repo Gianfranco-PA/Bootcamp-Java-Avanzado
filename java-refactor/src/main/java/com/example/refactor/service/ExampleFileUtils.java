@@ -8,29 +8,38 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 
 public class ExampleFileUtils {
 
     public static JSONObject getJsonFromFile(File inputSource) {
         JSONParser parser = new JSONParser();
-        try {
-            return (JSONObject) parser.parse(new FileReader(inputSource));
+        //We should close the file reader
+        try (FileReader fileReader = new FileReader(inputSource)) {
+            return (JSONObject) parser.parse(fileReader);
         } catch (IOException | ParseException e) {
+            //It is not a good practice show the stack trace to the user
             e.printStackTrace();
         }
+
         return null;
     }
 
     public static File getFileFromResources(String fileName) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
+        //We should check if the resource is null
         URL resource = classLoader.getResource(fileName);
-        if (resource != null) {
-            return new File(resource.getFile());
-        } else {
-            throw new IllegalArgumentException("Missing file");
+        if (resource == null) {
+            throw new IllegalArgumentException("File '" + fileName + "' not found");
         }
+
+        File file = new File(resource.getFile());
+        if (!file.exists() || !file.canRead()) {
+            //We need a more descriptive message
+            //throw new IllegalArgumentException("Missing file");
+            throw new IllegalArgumentException("File '" + fileName + "' not found or cannot be read");
+        }
+        return file;
     }
 
 }
