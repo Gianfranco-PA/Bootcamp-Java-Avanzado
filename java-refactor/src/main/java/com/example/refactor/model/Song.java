@@ -8,13 +8,17 @@ public class Song {
     private Boolean playable;
     private Integer popularity;
 
-    private String albumId;
-    private String albumType;
-    private String albumName;
-    private String albumReleaseDate;
-    private Integer albumTotalTracks;
+    // All the following attributes are moved to the Album class
+    /*
+     * private String albumId;
+     * private String albumType;
+     * private String albumName;
+     * private String albumReleaseDate;
+     * private Integer albumTotalTracks;
+     */
 
-    public SpotifyArtist spotifyArtist;
+    private Artist artist;
+    private Album album;
 
     public String getId() {
         return id;
@@ -56,51 +60,72 @@ public class Song {
         this.popularity = popularity;
     }
 
-    public String getAlbumId() {
-        return albumId;
+    // All the following getters and setters are moved to the Album class
+    /*
+     * public String getAlbumId() {
+     * return albumId;
+     * }
+     * 
+     * public void setAlbumId(String albumId) {
+     * this.albumId = albumId;
+     * }
+     * 
+     * public String getAlbumType() {
+     * return albumType;
+     * }
+     * 
+     * public void setAlbumType(String albumType) {
+     * this.albumType = albumType;
+     * }
+     * 
+     * public String getAlbumName() {
+     * return albumName;
+     * }
+     * 
+     * public void setAlbumName(String albumName) {
+     * this.albumName = albumName;
+     * }
+     * 
+     * public String getAlbumReleaseDate() {
+     * return albumReleaseDate;
+     * }
+     * 
+     * public void setAlbumReleaseDate(String albumReleaseDate) {
+     * this.albumReleaseDate = albumReleaseDate;
+     * }
+     * 
+     * public Integer getAlbumTotalTracks() {
+     * return albumTotalTracks;
+     * }
+     * 
+     * public void setAlbumTotalTracks(Integer albumTotalTracks) {
+     * this.albumTotalTracks = albumTotalTracks;
+     * }
+     * 
+     */
+
+    public Artist getArtist() {
+        return artist;
     }
 
-    public void setAlbumId(String albumId) {
-        this.albumId = albumId;
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 
-    public String getAlbumType() {
-        return albumType;
+    public Album getAlbum() {
+        return album;
     }
 
-    public void setAlbumType(String albumType) {
-        this.albumType = albumType;
+    public void setArtist(Album album) {
+        this.album = album;
     }
 
-    public String getAlbumName() {
-        return albumName;
-    }
+    public String toString() {
+        String songId = this.id;
+        String songName = this.name;
+        String artistName = this.artist.getName();
+        String albumName = this.album.getName();
 
-    public void setAlbumName(String albumName) {
-        this.albumName = albumName;
-    }
-
-    public String getAlbumReleaseDate() {
-        return albumReleaseDate;
-    }
-
-    public void setAlbumReleaseDate(String albumReleaseDate) {
-        this.albumReleaseDate = albumReleaseDate;
-    }
-
-    public Integer getAlbumTotalTracks() {
-        return albumTotalTracks;
-    }
-
-    public void setAlbumTotalTracks(Integer albumTotalTracks) {
-        this.albumTotalTracks = albumTotalTracks;
-    }
-
-    public SpotifyArtist getSpotifyArtist() {
-        return spotifyArtist;
-    }
-
-    public void setSpotifyArtist(SpotifyArtist spotifyArtist) {
-        this.spotifyArtist = spotifyArtist;
+        return String.format("%d - %s - %s - %s", songId, songName, artistName, albumName);
     }
 }

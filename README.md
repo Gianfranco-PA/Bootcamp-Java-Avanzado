@@ -24,5 +24,9 @@ The project can now be better than the original version, but it does not work ef
 List of improvements:
 - [ ] The `SongProcessor` class only saves one artist, and the `Song` class only allows one artist per song.
   - In the `playlist.json` file, there are songs by only one artist, but a song can have multiple artists.
+- [X] Create `Album` class to save Album data And update `Song` class.
+- [X] Create `Playlist` class to save the list of `Song` class and implement display info method.
+- [X] Rename `SpotifyArtist` to `Artist`
+- [ ] Create `PlaylistFactory` class to apply factory pattern.
 
 ## Part 2 - Upgrade Java Version

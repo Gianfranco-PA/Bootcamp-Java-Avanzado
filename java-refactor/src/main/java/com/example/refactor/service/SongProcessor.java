@@ -1,7 +1,7 @@
 package com.example.refactor.service;
 
 import com.example.refactor.model.Song;
-import com.example.refactor.model.SpotifyArtist;
+import com.example.refactor.model.Artist;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -60,10 +60,10 @@ public class SongProcessor {
             for (Object element : artistsJSON) {
                 JSONObject artistJSON = (JSONObject) element;
 
-                SpotifyArtist artist = new SpotifyArtist();
+                Artist artist = new Artist();
                 artist.setId(getString(artistJSON, "id"));
                 artist.setName(getString(artistJSON, "name"));
-                song.setSpotifyArtist(artist);
+                song.setArtist(artist);
             }
 
             spotifyPlayList.add(song);
@@ -71,7 +71,7 @@ public class SongProcessor {
 
         for (Song song : spotifyPlayList) {
             LOGGER.info(" - {} - {} - {} - {}", song.getId(), song.getName(),
-                                                song.getSpotifyArtist().getName(), song.getAlbumName());
+                                                song.getArtist().getName(), song.getAlbumName());
         }
     }
 
