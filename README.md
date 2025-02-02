@@ -29,9 +29,9 @@ List of improvements:
 - [X] Rename `SpotifyArtist` to `Artist`
 - [X] Create a class to manage all properties.
 - [X] Create a Factory pattern to Playlist service.
-- [ ] Implement a Factory pattern to manage file parsing
+- [X] Implement a Factory pattern to manage file parsing
   - [X] Create interface `IFileParser`
   - [X] Create a class to open files `ResourceFileLoader`
-  - [ ] Create a class to parser JSON
+  - [X] Create classes to parser JSON
 
 ## Part 2 - Upgrade Java Version
