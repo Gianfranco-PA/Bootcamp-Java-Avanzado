@@ -27,6 +27,7 @@ List of improvements:
 - [X] Create `Album` class to save Album data And update `Song` class.
 - [X] Create `Playlist` class to save the list of `Song` class and implement display info method.
 - [X] Rename `SpotifyArtist` to `Artist`
-- [ ] Create `PlaylistFactory` class to apply factory pattern.
+- [X] Create a class to manage all properties.
+- [X] Create a Factory pattern to Playlist service.
 
 ## Part 2 - Upgrade Java Version
