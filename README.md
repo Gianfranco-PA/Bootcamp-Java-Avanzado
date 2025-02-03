@@ -33,5 +33,7 @@ List of improvements:
   - [X] Create interface `IFileParser`
   - [X] Create a class to open files `ResourceFileLoader`
   - [X] Create classes to parser JSON
+- [X] Implementing `SpotifyPlaylistJsonService`
+- [X] Implementing new methods to get Playlist and testing
 
 ## Part 2 - Upgrade Java Version

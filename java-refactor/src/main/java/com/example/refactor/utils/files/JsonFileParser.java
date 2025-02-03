@@ -37,7 +37,7 @@ public class JsonFileParser implements IFileParser {
             return playList;
         } catch (IOException | ParseException e) {
             LOGGER.error("Error reading the JSON file", e);
-            return null;
+            throw new JsonParsingException("Error parsing JSON file: " + inputSource.getName(), e);
         }
     }
 

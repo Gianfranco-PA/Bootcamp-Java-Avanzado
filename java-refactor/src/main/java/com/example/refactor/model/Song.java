@@ -148,6 +148,6 @@ public class Song {
         artistNames = artistNames.substring(0, artistNames.length() - 2);
         artistNames = "[" + artistNames + "]";
 
-        return String.format("%d - %s - %s - %s", songId, songName, artistNames, albumName);
+        return String.format("%s - %s - %s - %s", songId, songName, artistNames, albumName);
     }
 }

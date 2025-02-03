@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 
+//It is not necessary
 public class ExampleFileUtils {
 
     public static JSONObject getJsonFromFile(File inputSource) {

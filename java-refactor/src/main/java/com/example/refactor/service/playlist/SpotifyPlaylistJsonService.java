@@ -1,7 +1,12 @@
 package com.example.refactor.service.playlist;
 
+import java.io.File;
+
 import com.example.refactor.model.PlayList;
 import com.example.refactor.service.config.ConfigManager;
+import com.example.refactor.utils.files.IFileParser;
+import com.example.refactor.utils.files.JsonFileParser;
+import com.example.refactor.utils.files.ResourceFileLoader;
 
 public class SpotifyPlaylistJsonService implements IPlaylistService{
 
@@ -14,7 +19,9 @@ public class SpotifyPlaylistJsonService implements IPlaylistService{
 
     @Override
     public PlayList getPlayList() {
-        // TODO Auto-generated method stub
-        return null;
+        File JsonFile = ResourceFileLoader.getFileFromResources(this.filename);
+        IFileParser parser = new JsonFileParser();
+        PlayList playlist = parser.extracPlayList(JsonFile);
+        return playlist;
     }
 }
