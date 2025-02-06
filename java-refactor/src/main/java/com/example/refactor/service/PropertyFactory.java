@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+//It is not necessary
 public class PropertyFactory {
 
     private static final Properties properties;

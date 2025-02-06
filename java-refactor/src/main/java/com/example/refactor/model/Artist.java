@@ -1,6 +1,6 @@
 package com.example.refactor.model;
 
-public class SpotifyArtist {
+public class Artist {
     private String id;
     private String name;
     //Not used and not needed
