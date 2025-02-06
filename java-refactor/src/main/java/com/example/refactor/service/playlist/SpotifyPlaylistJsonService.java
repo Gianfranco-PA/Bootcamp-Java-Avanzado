@@ -4,6 +4,7 @@ import java.io.File;
 
 import com.example.refactor.model.PlayList;
 import com.example.refactor.service.config.ConfigManager;
+import com.example.refactor.utils.files.FileParserFactory;
 import com.example.refactor.utils.files.IFileParser;
 import com.example.refactor.utils.files.JsonFileParser;
 import com.example.refactor.utils.files.ResourceFileLoader;
@@ -20,7 +21,7 @@ public class SpotifyPlaylistJsonService implements IPlaylistService{
     @Override
     public PlayList getPlayList() {
         File JsonFile = ResourceFileLoader.getFileFromResources(this.filename);
-        IFileParser parser = new JsonFileParser();
+        IFileParser parser = FileParserFactory.getParser("json");
         PlayList playlist = parser.extracPlayList(JsonFile);
         return playlist;
     }
