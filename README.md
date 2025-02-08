@@ -17,7 +17,7 @@ List of bugs:
 - [X] No exception handling in `PropertyFactory`.
 - [X] No exception handling in `SongProcessor`.
 
-### Refactoring
+### Refactoring - First iteration
 
 The project can now be better than the original version, but it does not work efficiently.
 
@@ -35,5 +35,15 @@ List of improvements:
   - [X] Create classes to parser JSON
 - [X] Implementing `SpotifyPlaylistJsonService`
 - [X] Implementing new methods to get Playlist and testing
+
+### Refactoring - Second iteration
+In this parte, I am improving the maintanbility and apply more design pattern. 
+The approach is that All servicies have a DTO, and then transform them to a Agnostic Playlist.
+- [] Clean unused classes:
+  - `ExampleFileUtils` class
+  - `PropertyFactory` class
+- [] Setting classes for Agnostic Playlist
+  - For the purpose of this system, is not necessary to save information about Album and Artist
+- [] Apply Patterns:
 
 ## Part 2 - Upgrade Java Version

@@ -6,7 +6,6 @@ import com.example.refactor.model.PlayList;
 import com.example.refactor.service.config.ConfigManager;
 import com.example.refactor.utils.files.FileParserFactory;
 import com.example.refactor.utils.files.IFileParser;
-import com.example.refactor.utils.files.JsonFileParser;
 import com.example.refactor.utils.files.ResourceFileLoader;
 
 public class SpotifyPlaylistJsonService implements IPlaylistService{
