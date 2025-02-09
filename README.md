@@ -39,7 +39,7 @@ List of improvements:
 ### Refactoring - Second iteration
 In this parte, I am improving the maintanbility and apply more design pattern. 
 The approach is that All servicies have a DTO, and then transform them to a Agnostic Playlist.
-- [] Clean unused classes:
+- [X] Clean unused classes:
   - `ExampleFileUtils` class
   - `PropertyFactory` class
 - [] Setting classes for Agnostic Playlist
