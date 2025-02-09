@@ -1,6 +1,5 @@
 package com.example.refactor.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Song {
@@ -10,7 +9,6 @@ public class Song {
     private List<String> artists;
 
     public Song() {
-        this.artists = new ArrayList<>();
     }
 
     public String getId() {

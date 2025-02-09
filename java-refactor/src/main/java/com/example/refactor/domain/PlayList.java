@@ -1,13 +1,11 @@
 package com.example.refactor.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayList {
     private List<Song> songs;
 
     public PlayList() {
-        this.songs = new ArrayList<>();
     }
 
     public List<Song> getSongs() {
