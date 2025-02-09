@@ -36,9 +36,12 @@ List of improvements:
 - [X] Implementing `SpotifyPlaylistJsonService`
 - [X] Implementing new methods to get Playlist and testing
 
-### Refactoring - Second iteration
-In this parte, I am improving the maintanbility and apply more design pattern. 
-The approach is that All servicies have a DTO, and then transform them to a Agnostic Playlist.
+### Refactoring - Second Iteration
+
+This system is designed to list playlists from different services. Therefore, it is necessary to create an agnostic playlist that contains only the essential information about the songs to display to the user.
+
+In this iteration, I am improving maintainability and applying additional design patterns. The approach is to have all services provide a DTO, which is then transformed into an agnostic playlist.
+
 - [X] Clean unused classes:
   - `ExampleFileUtils` class
   - `PropertyFactory` class
