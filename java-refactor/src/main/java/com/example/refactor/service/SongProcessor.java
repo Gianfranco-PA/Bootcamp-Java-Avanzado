@@ -2,8 +2,8 @@ package com.example.refactor.service;
 
 import com.example.refactor.domain.PlayList;
 import com.example.refactor.domain.Song;
+import com.example.refactor.service.factory.PlaylistServiceFactory;
 import com.example.refactor.service.playlist.IPlaylistService;
-import com.example.refactor.service.playlist.PlaylistServiceFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
