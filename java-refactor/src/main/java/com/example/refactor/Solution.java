@@ -1,9 +1,10 @@
 package com.example.refactor;
-import com.example.refactor.service.SongProcessor;
+import com.example.refactor.display.DefaultPlaylistDisplayStrategy;
+import com.example.refactor.facade.PlaylistFacade;
 
 public class Solution {
     public static void main(String... args) {
-        SongProcessor songProcessor = new SongProcessor();
-        songProcessor.processSongs();
+        PlaylistFacade facade = new PlaylistFacade(new DefaultPlaylistDisplayStrategy());
+        facade.showPlaylist();
     }
 }
