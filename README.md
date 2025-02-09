@@ -47,6 +47,10 @@ In this iteration, I am improving maintainability and applying additional design
   - `PropertyFactory` class
 - [X] Setting classes for Agnostic Playlist
   - For the purpose of this system, is not necessary to save information about Album and Artist. Extra information is about artist or album, is not necessary at this iteration, but it opens to modify in the future.
-- [] Apply Patterns:
+- [X] Apply Patterns:
+  - [X] Template Method pattern for Services
+  - [X] Strategy pattern for displaying the playlist
+  - [X] Facade for a easy access to system for `Solution` class
+- [X] Remove unused classes for the refactoring
 
 ## Part 2 - Upgrade Java Version
