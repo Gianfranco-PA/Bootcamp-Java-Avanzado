@@ -1,4 +1,4 @@
-package com.example.refactor.model;
+package com.example.refactor.domain;
 
 import java.util.ArrayList;
 import java.util.List;

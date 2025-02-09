@@ -11,11 +11,11 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.example.refactor.domain.Album;
+import com.example.refactor.domain.Artist;
+import com.example.refactor.domain.PlayList;
+import com.example.refactor.domain.Song;
 import com.example.refactor.exception.JsonParsingException;
-import com.example.refactor.model.Album;
-import com.example.refactor.model.Artist;
-import com.example.refactor.model.PlayList;
-import com.example.refactor.model.Song;
 
 public class JsonFileParser implements IFileParser {
 

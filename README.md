@@ -45,8 +45,8 @@ In this iteration, I am improving maintainability and applying additional design
 - [X] Clean unused classes:
   - `ExampleFileUtils` class
   - `PropertyFactory` class
-- [] Setting classes for Agnostic Playlist
-  - For the purpose of this system, is not necessary to save information about Album and Artist
+- [X] Setting classes for Agnostic Playlist
+  - For the purpose of this system, is not necessary to save information about Album and Artist. Extra information is about artist or album, is not necessary at this iteration, but it opens to modify in the future.
 - [] Apply Patterns:
 
 ## Part 2 - Upgrade Java Version
