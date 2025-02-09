@@ -1,6 +1,6 @@
 package com.example.refactor.service.playlist;
 
-import com.example.refactor.service.config.ConfigManager;
+import com.example.refactor.config.ConfigManager;
 
 public class PlaylistServiceFactory {
      public static IPlaylistService getService() {

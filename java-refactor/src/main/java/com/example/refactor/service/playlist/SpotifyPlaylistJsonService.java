@@ -2,8 +2,8 @@ package com.example.refactor.service.playlist;
 
 import java.io.File;
 
+import com.example.refactor.config.ConfigManager;
 import com.example.refactor.domain.PlayList;
-import com.example.refactor.service.config.ConfigManager;
 import com.example.refactor.utils.files.FileParserFactory;
 import com.example.refactor.utils.files.IFileParser;
 import com.example.refactor.utils.files.ResourceFileLoader;
