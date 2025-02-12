@@ -1,4 +1,4 @@
-package com.example.refactor.service.config;
+package com.example.refactor.config;
 
 import java.io.IOException;
 import java.util.Properties;

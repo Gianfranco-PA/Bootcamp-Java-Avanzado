@@ -1,6 +1,8 @@
-package com.example.refactor.service.playlist;
+package com.example.refactor.service.factory;
 
-import com.example.refactor.service.config.ConfigManager;
+import com.example.refactor.config.ConfigManager;
+import com.example.refactor.service.playlist.base.IPlaylistService;
+import com.example.refactor.service.playlist.spotify.SpotifyFilePlaylistService;
 
 public class PlaylistServiceFactory {
      public static IPlaylistService getService() {
@@ -9,7 +11,8 @@ public class PlaylistServiceFactory {
 
         switch (serviceType.toLowerCase()) {
             case "spotify-json":
-                return new SpotifyPlaylistJsonService();
+                String filename = config.getProperty("spotify.playlist.json.filename");
+                return new SpotifyFilePlaylistService(filename);
             default:    
                 throw new IllegalArgumentException("Servicio no soportado: " + serviceType);
         }

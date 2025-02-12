@@ -1,17 +1,15 @@
-package com.example.refactor.model;
+package com.example.refactor.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PlayList {
+public class Playlist {
     private List<Song> songs;
 
-    public PlayList() {
-        this.songs = new ArrayList<>();
+    public Playlist() {
     }
 
     public List<Song> getSongs() {
-        return songs;
+        return this.songs;
     }
 
     public void setSongs(List<Song> songs) {
