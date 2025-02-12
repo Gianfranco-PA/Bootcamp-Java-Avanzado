@@ -1,11 +1,11 @@
-package com.example.refactor.service.playlist;
+package com.example.refactor.service.playlist.base;
 
-import com.example.refactor.domain.PlayList;
+import com.example.refactor.domain.Playlist;
 
 public abstract class PlaylistServiceTemplate<R,T> implements IPlaylistService {
 
     @Override
-    public final PlayList getPlayList() {
+    public final Playlist getPlayList() {
         R rawData = retrieveRawData();
         T dto = parseRawData(rawData);
         return mapDtoToDomain(dto);
@@ -15,5 +15,5 @@ public abstract class PlaylistServiceTemplate<R,T> implements IPlaylistService {
 
     protected abstract T parseRawData(R rawData);
 
-    protected abstract PlayList mapDtoToDomain(T dto);
+    protected abstract Playlist mapDtoToDomain(T dto);
 }

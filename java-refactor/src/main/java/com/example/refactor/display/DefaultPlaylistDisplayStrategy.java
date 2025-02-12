@@ -3,7 +3,7 @@ package com.example.refactor.display;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.example.refactor.domain.PlayList;
+import com.example.refactor.domain.Playlist;
 import com.example.refactor.domain.Song;
 
 public class DefaultPlaylistDisplayStrategy implements PlaylistDisplayStrategy {
@@ -11,7 +11,7 @@ public class DefaultPlaylistDisplayStrategy implements PlaylistDisplayStrategy {
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultPlaylistDisplayStrategy.class);
 
     @Override
-    public void display(PlayList playlist) {
+    public void display(Playlist playlist) {
         LOGGER.info("=== Playlist ===");
         for (Song song : playlist.getSongs()) {
             String id = song.getId();

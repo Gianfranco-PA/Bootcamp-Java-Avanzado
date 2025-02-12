@@ -2,14 +2,14 @@ package com.example.refactor.domain;
 
 import java.util.List;
 
-public class PlayList {
+public class Playlist {
     private List<Song> songs;
 
-    public PlayList() {
+    public Playlist() {
     }
 
     public List<Song> getSongs() {
-        return songs;
+        return this.songs;
     }
 
     public void setSongs(List<Song> songs) {

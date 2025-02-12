@@ -52,5 +52,6 @@ In this iteration, I am improving maintainability and applying additional design
   - [X] Strategy pattern for displaying the playlist
   - [X] Facade for a easy access to system for `Solution` class
 - [X] Remove unused classes for the refactoring
+- [X] Reorganize the classes
 
 ## Part 2 - Upgrade Java Version

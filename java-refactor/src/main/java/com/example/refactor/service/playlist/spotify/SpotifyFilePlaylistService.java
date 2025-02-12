@@ -1,8 +1,8 @@
 package com.example.refactor.service.playlist.spotify;
 
+import com.example.refactor.service.playlist.base.PlaylistServiceTemplate;
 import com.example.refactor.service.playlist.spotify.dto.SpotifyPlaylistDTO;
-import com.example.refactor.domain.PlayList;
-import com.example.refactor.service.playlist.PlaylistServiceTemplate;
+import com.example.refactor.domain.Playlist;
 import com.example.refactor.utils.files.ResourceFileLoader;
 import java.io.File;
 
@@ -26,7 +26,7 @@ public class SpotifyFilePlaylistService extends PlaylistServiceTemplate<File, Sp
     }
 
     @Override
-    protected PlayList mapDtoToDomain(SpotifyPlaylistDTO dto) {
+    protected Playlist mapDtoToDomain(SpotifyPlaylistDTO dto) {
         SpotifyPlaylistMapper mapper = new SpotifyPlaylistMapper();
         return mapper.map(dto);
     }

@@ -1,7 +1,7 @@
 package com.example.refactor.display;
 
-import com.example.refactor.domain.PlayList;
+import com.example.refactor.domain.Playlist;
 
 public interface PlaylistDisplayStrategy {
-    void display(PlayList playlist);
+    void display(Playlist playlist);
 }

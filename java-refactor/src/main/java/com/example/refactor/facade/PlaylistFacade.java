@@ -2,9 +2,10 @@ package com.example.refactor.facade;
 
 import com.example.refactor.display.PlaylistDisplayStrategy;
 import com.example.refactor.display.PlaylistDisplayer;
-import com.example.refactor.domain.PlayList;
-import com.example.refactor.service.playlist.IPlaylistService;
+import com.example.refactor.domain.Playlist;
 import com.example.refactor.service.factory.PlaylistServiceFactory;
+import com.example.refactor.service.playlist.base.IPlaylistService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +21,7 @@ public class PlaylistFacade {
     public void showPlaylist() {
         try {
             IPlaylistService playlistService = PlaylistServiceFactory.getService();
-            PlayList playlist = playlistService.getPlayList();
+            Playlist playlist = playlistService.getPlayList();
 
             PlaylistDisplayer displayer = new PlaylistDisplayer(displayStrategy);
             displayer.display(playlist);

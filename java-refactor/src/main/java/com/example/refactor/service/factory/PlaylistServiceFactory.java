@@ -1,7 +1,7 @@
 package com.example.refactor.service.factory;
 
 import com.example.refactor.config.ConfigManager;
-import com.example.refactor.service.playlist.IPlaylistService;
+import com.example.refactor.service.playlist.base.IPlaylistService;
 import com.example.refactor.service.playlist.spotify.SpotifyFilePlaylistService;
 
 public class PlaylistServiceFactory {

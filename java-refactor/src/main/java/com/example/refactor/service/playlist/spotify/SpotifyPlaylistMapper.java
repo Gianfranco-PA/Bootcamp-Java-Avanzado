@@ -5,7 +5,7 @@ import com.example.refactor.service.playlist.spotify.dto.SpotifyPlaylistItemDTO;
 import com.example.refactor.service.playlist.spotify.dto.SpotifyTrackDTO;
 import com.example.refactor.service.playlist.spotify.dto.SpotifyAlbumDTO;
 import com.example.refactor.service.playlist.spotify.dto.SpotifyArtistDTO;
-import com.example.refactor.domain.PlayList;
+import com.example.refactor.domain.Playlist;
 import com.example.refactor.domain.Song;
 
 import java.util.ArrayList;
@@ -13,8 +13,8 @@ import java.util.List;
 
 public class SpotifyPlaylistMapper {
 
-    public PlayList map(SpotifyPlaylistDTO dto) {
-        PlayList playList = new PlayList();
+    public Playlist map(SpotifyPlaylistDTO dto) {
+        Playlist playList = new Playlist();
 
         List<Song> songs = new ArrayList<>();
         

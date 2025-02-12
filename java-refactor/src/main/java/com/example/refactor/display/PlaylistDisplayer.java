@@ -1,6 +1,6 @@
 package com.example.refactor.display;
 
-import com.example.refactor.domain.PlayList;
+import com.example.refactor.domain.Playlist;
 
 public class PlaylistDisplayer {
     private PlaylistDisplayStrategy strategy;
@@ -13,8 +13,7 @@ public class PlaylistDisplayer {
         this.strategy = strategy;
     }
 
-    public void display(PlayList playlist) {
+    public void display(Playlist playlist) {
         strategy.display(playlist);
     }
 }
-
