@@ -1,28 +1,27 @@
 # Refactor Project | Advanced Java Bootcamp - Codigofacilito
 
-## Part 1 - Fix Bugs and Refactor
+**Version en español: [README](README-ES.md)**
 
-### Context
-The initial project aims to structure and list data of Spotify songs from a file. It is necessary to refactor the code to use other song services.
+## Phase 1: Fix Bugs
 
-### Bugs
+### Overview
+The original version of this project was designed to process and list Spotify song data from a JSON file. However, the initial implementation had several issues, including incorrect data types, improper exception handling, and an unnecessary implementation of certain fields. In this **fix-bugs** phase, our focus is to resolve these critical issues so that the application can reliably read, parse, and process the playlist data.
 
-The project can display the ID, name of the song, name of the artist, and name of the album. However, the metadata is not saved in the correct variable types and does not handle some important exceptions.
+### Key Improvements
+- **Correct Data Types:**  
+  - Update the `Song` model so that fields like `explicit`, `playable`, and `popularity` correctly reflect their intended data types.
+  
+- **Remove Unnecessary Fields:**  
+  - Eliminate the `genres` field from the `SpotifyArtist` class as it is not required by the Spotify API for playlists.
+  
+- **Improve Exception Handling:**  
+  - Enhance error handling in `ExampleFileUtils` to ensure robust reading and parsing of JSON files.
+  - Strengthen the exception management in `PropertyFactory` during configuration file loading.
+  - Add validations in `SongProcessor` to prevent crashes when processing malformed or missing data.
 
-List of bugs:
-- [X] Types of `explicit`, `playable`, and `popularity` fields in the `Song` class.
-- [X] The `genres` field in SpotifyArtist is unnecessary and incorrectly implemented.
-  - In addition, the `genres` field does not exist in the Spotify API for playlists, according to the [Spotify API documentation](https://developer.spotify.com/documentation/web-api/concepts/playlists).
-- [X] No exception handling in `ExampleFileUtils`.
-- [X] No exception handling in `PropertyFactory`.
-- [X] No exception handling in `SongProcessor`.
+- **Basic Data Validation:**  
+  - Ensure that all required keys are present and non-null when parsing JSON data. Meaningful exceptions are thrown when data is missing or incorrect.
 
-### Refactoring
-
-The project can now be better than the original version, but it does not work efficiently.
-
-List of improvements:
-- [ ] The `SongProcessor` class only saves one artist, and the `Song` class only allows one artist per song.
-  - In the `playlist.json` file, there are songs by only one artist, but a song can have multiple artists.
-
-## Part 2 - Upgrade Java Version
+### Known Limitations
+- **Single Artist per Song:**
+  - In this phase, the `SongProcessor` still assigns only one artist per song even though a song might feature multiple artists. This issue is acknowledged and will be addressed in later phases.
