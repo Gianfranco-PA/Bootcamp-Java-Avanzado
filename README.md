@@ -55,3 +55,7 @@ In this iteration, I am improving maintainability and applying additional design
 - [X] Reorganize the classes
 
 ## Part 2 - Upgrade Java Version
+I am going to upgrade the project from java 1.8 to java 23.
+- [X] Upgrading the Compiler to java 23
+- [] Updating dependencies
+- [] Applying more loggings
