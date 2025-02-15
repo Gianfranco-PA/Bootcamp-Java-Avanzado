@@ -21,10 +21,10 @@ public class JsonValidationUtils {
     public static String getString(JSONObject jsonObject, String key, String context) {
         validateKeyExists(jsonObject, key, context);
         Object value = jsonObject.get(key);
-        if (!(value instanceof String)) {
+        if (!(value instanceof String stringValue)) {
             throw new JsonParsingException("The value for the key '" + key + "' in " + context + " is not a String");
         }
-        return (String) value;
+        return stringValue;
     }
 
     /**
@@ -33,10 +33,10 @@ public class JsonValidationUtils {
     public static Boolean getBoolean(JSONObject jsonObject, String key, String context) {
         validateKeyExists(jsonObject, key, context);
         Object value = jsonObject.get(key);
-        if (!(value instanceof Boolean)) {
+        if (!(value instanceof Boolean booleanValue)) {
             throw new JsonParsingException("The value for the key '" + key + "' in " + context + " is not a Boolean");
         }
-        return (Boolean) value;
+        return booleanValue;
     }
 
     /**
@@ -45,10 +45,10 @@ public class JsonValidationUtils {
     public static int getInt(JSONObject jsonObject, String key, String context) {
         validateKeyExists(jsonObject, key, context);
         Object value = jsonObject.get(key);
-        if (!(value instanceof Number)) {
+        if (!(value instanceof Number numberValue)) {
             throw new JsonParsingException("The value for the key '" + key + "' in " + context + " is not a Number");
         }
-        return ((Number) value).intValue();
+        return numberValue.intValue();
     }
     
     /**
@@ -57,13 +57,12 @@ public class JsonValidationUtils {
     public static JSONArray getJSONArray(JSONObject jsonObject, String key, String context) {
         validateKeyExists(jsonObject, key, context);
         Object value = jsonObject.get(key);
-        if (!(value instanceof JSONArray)) {
+        if (!(value instanceof JSONArray jsonArrayValue)) {
             throw new JsonParsingException("The key '" + key + "' is not an array in " + context);
         }
-        JSONArray array = (JSONArray) value;
-        if (array.isEmpty()) {
+        if (jsonArrayValue.isEmpty()) {
             throw new JsonParsingException("The array '" + key + "' is empty in " + context);
         }
-        return array;
+        return jsonArrayValue;
     }
 }
