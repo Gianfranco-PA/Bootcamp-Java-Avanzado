@@ -28,13 +28,15 @@ public class SpotifyJsonParser {
      * @return SpotifyPlaylistDTO object representing the structure of the JSON.
      */
     public SpotifyPlaylistDTO parse(File jsonFile) {
+        LOGGER.info("Starting to parse the JSON file: {}", jsonFile.getName());
         JSONParser parser = new JSONParser();
         try (FileReader reader = new FileReader(jsonFile)) {
             JSONObject rootObject = (JSONObject) parser.parse(reader);
             
             // Validate and get the "items" array
             JSONArray itemsArray = JsonValidationUtils.getJSONArray(rootObject, "items", "SpotifyPlaylistDTO");
-            
+            LOGGER.info("Found {} items in the JSON", itemsArray.size());
+
             SpotifyPlaylistDTO playlistDTO = new SpotifyPlaylistDTO();
             List<SpotifyPlaylistItemDTO> itemDTOList = new ArrayList<>();
             
@@ -44,7 +46,7 @@ public class SpotifyJsonParser {
                 itemDTOList.add(itemDTO);
             }
             playlistDTO.setItems(itemDTOList);
-            
+            LOGGER.info("Finished parsing the JSON file: {}", jsonFile.getName());
             return playlistDTO;
         } catch (IOException | ParseException e) {
             LOGGER.error("Error parsing Spotify JSON file: {}", e.getMessage());
