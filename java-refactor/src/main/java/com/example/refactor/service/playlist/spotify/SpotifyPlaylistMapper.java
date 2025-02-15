@@ -24,28 +24,28 @@ public class SpotifyPlaylistMapper {
 
         List<Song> songs = new ArrayList<>();
         
-        if (dto != null && dto.getItems() != null) {
-            for (SpotifyPlaylistItemDTO itemDTO : dto.getItems()) {
-                SpotifyTrackDTO trackDTO = itemDTO.getTrack();
+        if (dto != null && dto.items() != null) {
+            for (SpotifyPlaylistItemDTO itemDTO : dto.items()) {
+                SpotifyTrackDTO trackDTO = itemDTO.track();
                 if (trackDTO == null) {
                     LOGGER.warn("Found an item with null track, skipping");
                     continue;
                 }
                 
                 Song song = new Song();
-                song.setId(trackDTO.getId());
-                song.setName(trackDTO.getName());
+                song.setId(trackDTO.id());
+                song.setName(trackDTO.name());
 
-                SpotifyAlbumDTO albumDTO = trackDTO.getAlbum();
+                SpotifyAlbumDTO albumDTO = trackDTO.album();
                 if (albumDTO != null) {
-                    song.setAlbum(albumDTO.getName());
+                    song.setAlbum(albumDTO.name());
                 }
                 
-                List<SpotifyArtistDTO> artistDTOs = trackDTO.getArtists();
+                List<SpotifyArtistDTO> artistDTOs = trackDTO.artists();
                 if (artistDTOs != null) {
                     List<String> artists= new ArrayList<>(); 
                     for (SpotifyArtistDTO artistDTO : artistDTOs) {
-                        artists.add(artistDTO.getName());
+                        artists.add(artistDTO.name());
                     }
                     song.setArtists(artists);
                 }

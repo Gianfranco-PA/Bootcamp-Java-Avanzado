@@ -59,3 +59,4 @@ I am going to upgrade the project from java 1.8 to java 23.
 - [X] Upgrading the Compiler to java 23
 - [X] Updating dependencies
 - [X] Applying more logs
+- [X] Refactoring DTOs with Records
