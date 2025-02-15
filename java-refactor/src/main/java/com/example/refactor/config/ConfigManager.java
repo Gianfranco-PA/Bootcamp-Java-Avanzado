@@ -3,8 +3,12 @@ package com.example.refactor.config;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ConfigManager {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConfigManager.class);
     private static final String CONFIG_FILE = "config.properties";
     private static ConfigManager instance;
     private Properties properties;
@@ -12,9 +16,12 @@ public class ConfigManager {
     private ConfigManager() {
         properties = new Properties();
         try {
-            properties.load(getClass().getClassLoader().getResourceAsStream(ConfigManager.CONFIG_FILE));
+            LOGGER.info("Loading configuration from {}", CONFIG_FILE);
+            properties.load(getClass().getClassLoader().getResourceAsStream(CONFIG_FILE));
+            LOGGER.info("Configuration loaded successfully");
         } catch (IOException e) {
-            throw new RuntimeException("Error al cargar configuración", e);
+            LOGGER.error("Error loading configuration", e);
+            throw new RuntimeException("Error loading configuration", e);
         }
     }
 

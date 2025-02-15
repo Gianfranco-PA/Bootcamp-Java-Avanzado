@@ -28,14 +28,14 @@ public class SpotifyJsonParser {
      * @return SpotifyPlaylistDTO object representing the structure of the JSON.
      */
     public SpotifyPlaylistDTO parse(File jsonFile) {
+        LOGGER.info("Starting to parse the JSON file: {}", jsonFile.getName());
         JSONParser parser = new JSONParser();
         try (FileReader reader = new FileReader(jsonFile)) {
             JSONObject rootObject = (JSONObject) parser.parse(reader);
             
             // Validate and get the "items" array
             JSONArray itemsArray = JsonValidationUtils.getJSONArray(rootObject, "items", "SpotifyPlaylistDTO");
-            
-            SpotifyPlaylistDTO playlistDTO = new SpotifyPlaylistDTO();
+            LOGGER.info("Found {} items in the JSON", itemsArray.size());
             List<SpotifyPlaylistItemDTO> itemDTOList = new ArrayList<>();
             
             for (Object itemObj : itemsArray) {
@@ -43,8 +43,8 @@ public class SpotifyJsonParser {
                 SpotifyPlaylistItemDTO itemDTO = parsePlaylistItem(itemJson);
                 itemDTOList.add(itemDTO);
             }
-            playlistDTO.setItems(itemDTOList);
-            
+            SpotifyPlaylistDTO playlistDTO = new SpotifyPlaylistDTO(itemDTOList);
+            LOGGER.info("Finished parsing the JSON file: {}", jsonFile.getName());
             return playlistDTO;
         } catch (IOException | ParseException e) {
             LOGGER.error("Error parsing Spotify JSON file: {}", e.getMessage());
@@ -59,17 +59,15 @@ public class SpotifyJsonParser {
      * @return SpotifyPlaylistItemDTO object.
      */
     private SpotifyPlaylistItemDTO parsePlaylistItem(JSONObject itemJson) {
-        SpotifyPlaylistItemDTO itemDTO = new SpotifyPlaylistItemDTO();
-
         // Parse the user who added the song
         JSONObject addedByJson = (JSONObject) itemJson.get("added_by");
         String id = JsonValidationUtils.getString(addedByJson, "id", "SpotifyUserDTO");
-        itemDTO.setAdded_by(id);
 
         // Parse the track information
         JSONObject trackJson = (JSONObject) itemJson.get("track");
         SpotifyTrackDTO trackDTO = parseSpotifyTrack(trackJson);
-        itemDTO.setTrack(trackDTO);
+
+        SpotifyPlaylistItemDTO itemDTO = new SpotifyPlaylistItemDTO(id, trackDTO);
 
         return itemDTO;
     }
@@ -81,12 +79,9 @@ public class SpotifyJsonParser {
      * @return SpotifyTrackDTO object.
      */
     private SpotifyTrackDTO parseSpotifyTrack(JSONObject trackJson) {
-        SpotifyTrackDTO trackDTO = new SpotifyTrackDTO();
-
         // Parse the album
         JSONObject albumJson = (JSONObject) trackJson.get("album");
         SpotifyAlbumDTO albumDTO = parseSpotifyAlbum(albumJson);
-        trackDTO.setAlbum(albumDTO);
 
         // Parse the list of artists
         JSONArray artistsJsonArray = JsonValidationUtils.getJSONArray(trackJson, "artists", "SpotifyTrackDTO");
@@ -96,16 +91,15 @@ public class SpotifyJsonParser {
             SpotifyArtistDTO artistDTO = parseSpotifyArtist(artistJson);
             artistsList.add(artistDTO);
         }
-        trackDTO.setArtists(artistsList);
 
         // Parse simple attributes
-        trackDTO.setExplicit(JsonValidationUtils.getBoolean(trackJson, "explicit", "SpotifyTrackDTO"));
-        trackDTO.setId(JsonValidationUtils.getString(trackJson, "id", "SpotifyTrackDTO"));
-        trackDTO.setIs_playable(JsonValidationUtils.getBoolean(trackJson, "is_playable", "SpotifyTrackDTO"));
-        trackDTO.setName(JsonValidationUtils.getString(trackJson, "name", "SpotifyTrackDTO"));
-        trackDTO.setPopularity(JsonValidationUtils.getInt(trackJson, "popularity", "SpotifyTrackDTO"));
+        boolean explicit = JsonValidationUtils.getBoolean(trackJson, "explicit", "SpotifyTrackDTO");
+        String id = JsonValidationUtils.getString(trackJson, "id", "SpotifyTrackDTO");
+        boolean isPlayable = JsonValidationUtils.getBoolean(trackJson, "is_playable", "SpotifyTrackDTO");
+        String name = JsonValidationUtils.getString(trackJson, "name", "SpotifyTrackDTO");
+        int popularity = JsonValidationUtils.getInt(trackJson, "popularity", "SpotifyTrackDTO");
 
-        return trackDTO;
+        return new SpotifyTrackDTO(albumDTO, artistsList, explicit, id, isPlayable, name, popularity);
     }
 
     /**
@@ -115,14 +109,14 @@ public class SpotifyJsonParser {
      * @return SpotifyAlbumDTO object.
      */
     private SpotifyAlbumDTO parseSpotifyAlbum(JSONObject albumJson) {
-        SpotifyAlbumDTO albumDTO = new SpotifyAlbumDTO();
-        albumDTO.setAlbum_type(JsonValidationUtils.getString(albumJson, "album_type", "SpotifyAlbumDTO"));
-        albumDTO.setHref(JsonValidationUtils.getString(albumJson, "href", "SpotifyAlbumDTO"));
-        albumDTO.setId(JsonValidationUtils.getString(albumJson, "id", "SpotifyAlbumDTO"));
-        albumDTO.setName(JsonValidationUtils.getString(albumJson, "name", "SpotifyAlbumDTO"));
-        albumDTO.setRelease_date(JsonValidationUtils.getString(albumJson, "release_date", "SpotifyAlbumDTO"));
-        albumDTO.setTotal_tracks(JsonValidationUtils.getInt(albumJson, "total_tracks", "SpotifyAlbumDTO"));
-        return albumDTO;
+        return new SpotifyAlbumDTO(
+            JsonValidationUtils.getString(albumJson, "album_type", "SpotifyAlbumDTO"),
+            JsonValidationUtils.getString(albumJson, "href", "SpotifyAlbumDTO"),
+            JsonValidationUtils.getString(albumJson, "id", "SpotifyAlbumDTO"),
+            JsonValidationUtils.getString(albumJson, "name", "SpotifyAlbumDTO"),
+            JsonValidationUtils.getString(albumJson, "release_date", "SpotifyAlbumDTO"),
+            JsonValidationUtils.getInt(albumJson, "total_tracks", "SpotifyAlbumDTO")
+        );
     }
 
     /**
@@ -132,27 +126,25 @@ public class SpotifyJsonParser {
      * @return SpotifyArtistDTO object.
      */
     private SpotifyArtistDTO parseSpotifyArtist(JSONObject artistJson) {
-        SpotifyArtistDTO artistDTO = new SpotifyArtistDTO();
-
         // external_urls is handled as a Map<String, String>
         JSONObject externalUrlsJson = (JSONObject) artistJson.get("external_urls");
+        Map<String, String> externalUrls = new HashMap<>();
         if (externalUrlsJson != null) {
-            Map<String, String> externalUrls = new HashMap<>();
             for (Object key : externalUrlsJson.keySet()) {
                 String k = (String) key;
                 String v = (String) externalUrlsJson.get(k);
                 externalUrls.put(k, v);
             }
-            artistDTO.setExternal_urls(externalUrls);
         }
 
-        artistDTO.setHref(JsonValidationUtils.getString(artistJson, "href", "SpotifyArtistDTO"));
-        artistDTO.setId(JsonValidationUtils.getString(artistJson, "id", "SpotifyArtistDTO"));
-        artistDTO.setName(JsonValidationUtils.getString(artistJson, "name", "SpotifyArtistDTO"));
-        artistDTO.setType(JsonValidationUtils.getString(artistJson, "type", "SpotifyArtistDTO"));
-        artistDTO.setUri(JsonValidationUtils.getString(artistJson, "uri", "SpotifyArtistDTO"));
-
-        return artistDTO;
+        return new SpotifyArtistDTO(
+            externalUrls,
+            JsonValidationUtils.getString(artistJson, "href", "SpotifyArtistDTO"),
+            JsonValidationUtils.getString(artistJson, "id", "SpotifyArtistDTO"),
+            JsonValidationUtils.getString(artistJson, "name", "SpotifyArtistDTO"),
+            JsonValidationUtils.getString(artistJson, "type", "SpotifyArtistDTO"),
+            JsonValidationUtils.getString(artistJson, "uri", "SpotifyArtistDTO")
+        );
     }
 }
 

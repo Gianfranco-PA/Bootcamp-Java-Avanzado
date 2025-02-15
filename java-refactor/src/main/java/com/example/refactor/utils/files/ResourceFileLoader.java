@@ -10,6 +10,7 @@ public class ResourceFileLoader {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ResourceFileLoader.class);
     public static File getFileFromResources(String fileName) {
+        LOGGER.info("Trying to load file '{}' from resources", fileName);
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
         // We should check if the resource is null

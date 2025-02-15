@@ -19,12 +19,14 @@ public class PlaylistFacade {
     }
 
     public void showPlaylist() {
+        LOGGER.info("Starting process to display the playlist");
         try {
             IPlaylistService playlistService = PlaylistServiceFactory.getService();
             Playlist playlist = playlistService.getPlayList();
 
             PlaylistDisplayer displayer = new PlaylistDisplayer(displayStrategy);
             displayer.display(playlist);
+            LOGGER.info("Playlist displayed successfully");
         } catch (Exception e) {
             LOGGER.error("Error displaying the playlist: {}", e.getMessage(), e);
         }

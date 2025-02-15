@@ -55,3 +55,10 @@ In this iteration, I am improving maintainability and applying additional design
 - [X] Reorganize the classes
 
 ## Part 2 - Upgrade Java Version
+I am going to upgrade the project from java 1.8 to java 23.
+- [X] Upgrading the Compiler to java 23
+- [X] Updating dependencies
+- [X] Applying more logs
+- [X] Refactoring DTOs with Records
+- [X] Implementing Pattern Matching in `JsonValidationUtils`
+- [X] Implementing Switch Expressions and type var in `PlaylistServiceFactory`
