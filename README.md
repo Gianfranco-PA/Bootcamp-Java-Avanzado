@@ -1,39 +1,34 @@
 # Refactor Project | Advanced Java Bootcamp - Codigofacilito
 
-## Part 1 - Fix Bugs and Refactor
+**Version en español: [README](README-ES.md)**
 
-### Context
-The initial project aims to structure and list data of Spotify songs from a file. It is necessary to refactor the code to use other song services.
+## Phase 2: Refactor Iteration 1
 
-### Bugs
+### Overview
+In this iteration, we significantly reorganize the project structure to improve maintainability and better model the domain. Building upon the fixes applied in Phase 1, the focus now is on refactoring the data models and service layers to support a more realistic representation of playlist data. This iteration introduces new classes for **Album**, **Artist**, and **PlayList**, and updates the **Song** class accordingly. It also implements a factory pattern for playlist services and a modular file parsing strategy.
 
-The project can display the ID, name of the song, name of the artist, and name of the album. However, the metadata is not saved in the correct variable types and does not handle some important exceptions.
+### Key Improvements
 
-List of bugs:
-- [X] Types of `explicit`, `playable`, and `popularity` fields in the `Song` class.
-- [X] The `genres` field in SpotifyArtist is unnecessary and incorrectly implemented.
-  - In addition, the `genres` field does not exist in the Spotify API for playlists, according to the [Spotify API documentation](https://developer.spotify.com/documentation/web-api/concepts/playlists).
-- [X] No exception handling in `ExampleFileUtils`.
-- [X] No exception handling in `PropertyFactory`.
-- [X] No exception handling in `SongProcessor`.
+- **Domain Model Enhancements:**
+  - **Album Class:**  
+    A dedicated `Album` class has been created to encapsulate album-related data such as ID, name, release date, total tracks, and album type. This separates album information from the `Song` class.
+  
+  - **Artist Class:**  
+    The original `SpotifyArtist` has been renamed and refactored to `Artist`. This class now only contains relevant artist information (ID and name), removing unnecessary or unused fields.
+  
+  - **PlayList Class:**  
+    A new `PlayList` class has been introduced to manage a collection of `Song` objects. This class provides methods for adding and removing songs and serves as a container for the processed playlist data.
+  
+  - **Song Class Adjustments:**  
+    The `Song` class has been updated to:
+    - Store its album information as an `Album` object rather than using separate album-related fields.
+    - Maintain a list of `Artist` objects, allowing multiple artists per song instead of limiting to one.
 
-### Refactoring
+- **Service Layer Refactoring:**
+  - A new interface `IPlaylistService` has been introduced along with its implementation `SpotifyPlaylistJsonService`, which uses the refactored domain models to produce a `PlayList` object.
+  - A factory pattern has been implemented in `PlaylistServiceFactory` to encapsulate the creation of the playlist service based on configuration properties.
 
-The project can now be better than the original version, but it does not work efficiently.
-
-List of improvements:
-- [X] The `SongProcessor` class only saves one artist, and the `Song` class only allows one artist per song.
-  - In the `playlist.json` file, there are songs by only one artist, but a song can have multiple artists.
-- [X] Create `Album` class to save Album data And update `Song` class.
-- [X] Create `Playlist` class to save the list of `Song` class and implement display info method.
-- [X] Rename `SpotifyArtist` to `Artist`
-- [X] Create a class to manage all properties.
-- [X] Create a Factory pattern to Playlist service.
-- [X] Implement a Factory pattern to manage file parsing
-  - [X] Create interface `IFileParser`
-  - [X] Create a class to open files `ResourceFileLoader`
-  - [X] Create classes to parser JSON
-- [X] Implementing `SpotifyPlaylistJsonService`
-- [X] Implementing new methods to get Playlist and testing
-
-## Part 2 - Upgrade Java Version
+- **File Parsing Improvements:**
+  - The file parsing mechanism has been modularized with the introduction of the `IFileParser` interface and its concrete implementation `JsonFileParser`.
+  - A factory class (`FileParserFactory`) is used to obtain the correct file parser based on the file type.
+  - Existing utilities such as `ResourceFileLoader` and `JsonValidationUtils` have been retained to support robust file handling and JSON validation.
