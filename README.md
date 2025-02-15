@@ -1,57 +1,22 @@
 # Refactor Project | Advanced Java Bootcamp - Codigofacilito
 
-## Part 1 - Fix Bugs and Refactor
+**Version en español: [README](README-ES.md)**
 
-### Context
-The initial project aims to structure and list data of Spotify songs from a file. It is necessary to refactor the code to use other song services.
+## Phase 3: Refactor Iteration 2
 
-### Bugs
+### Overview
+In this iteration, the system is refactored to support an agnostic playlist model that contains only the essential song information for display. The goal is to decouple the domain from extraneous album or artist details and focus on presenting the core playlist data in a consistent format. This iteration also applies several design patterns to improve maintainability and scalability.
 
-The project can display the ID, name of the song, name of the artist, and name of the album. However, the metadata is not saved in the correct variable types and does not handle some important exceptions.
+### Key Improvements
 
-List of bugs:
-- [X] Types of `explicit`, `playable`, and `popularity` fields in the `Song` class.
-- [X] The `genres` field in SpotifyArtist is unnecessary and incorrectly implemented.
-  - In addition, the `genres` field does not exist in the Spotify API for playlists, according to the [Spotify API documentation](https://developer.spotify.com/documentation/web-api/concepts/playlists).
-- [X] No exception handling in `ExampleFileUtils`.
-- [X] No exception handling in `PropertyFactory`.
-- [X] No exception handling in `SongProcessor`.
-
-### Refactoring - First iteration
-
-The project can now be better than the original version, but it does not work efficiently.
-
-List of improvements:
-- [X] The `SongProcessor` class only saves one artist, and the `Song` class only allows one artist per song.
-  - In the `playlist.json` file, there are songs by only one artist, but a song can have multiple artists.
-- [X] Create `Album` class to save Album data And update `Song` class.
-- [X] Create `Playlist` class to save the list of `Song` class and implement display info method.
-- [X] Rename `SpotifyArtist` to `Artist`
-- [X] Create a class to manage all properties.
-- [X] Create a Factory pattern to Playlist service.
-- [X] Implement a Factory pattern to manage file parsing
-  - [X] Create interface `IFileParser`
-  - [X] Create a class to open files `ResourceFileLoader`
-  - [X] Create classes to parser JSON
-- [X] Implementing `SpotifyPlaylistJsonService`
-- [X] Implementing new methods to get Playlist and testing
-
-### Refactoring - Second Iteration
-
-This system is designed to list playlists from different services. Therefore, it is necessary to create an agnostic playlist that contains only the essential information about the songs to display to the user.
-
-In this iteration, I am improving maintainability and applying additional design patterns. The approach is to have all services provide a DTO, which is then transformed into an agnostic playlist.
-
-- [X] Clean unused classes:
-  - `ExampleFileUtils` class
-  - `PropertyFactory` class
-- [X] Setting classes for Agnostic Playlist
-  - For the purpose of this system, is not necessary to save information about Album and Artist. Extra information is about artist or album, is not necessary at this iteration, but it opens to modify in the future.
-- [X] Apply Patterns:
-  - [X] Template Method pattern for Services
-  - [X] Strategy pattern for displaying the playlist
-  - [X] Facade for a easy access to system for `Solution` class
-- [X] Remove unused classes for the refactoring
-- [X] Reorganize the classes
-
-## Part 2 - Upgrade Java Version
+- **Agnostic Playlist Model:**  
+  - The domain is simplified to include only the essential information (song ID, name, album, and list of artist names) needed for display.
+  
+- **Design Pattern Applications:**  
+  - **Template Method Pattern:** Standardizes the workflow for playlist services.
+  - **Strategy Pattern:** Enables interchangeable display strategies through the `PlaylistDisplayStrategy` interface and its implementation (`DefaultPlaylistDisplayStrategy`).
+  - **Facade Pattern:** Provides a simplified interface via `PlaylistFacade` for accessing the playlist functionality.
+  
+- **Cleanup and Reorganization:**  
+  - Removed unused classes from earlier phases (e.g., `ExampleFileUtils` and `PropertyFactory`).
+  - Reorganized the code to clearly separate configuration, display, domain, service, and utility layers.
